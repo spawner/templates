@@ -1,0 +1,62 @@
+html
+{
+    background-color: #55AF6B;
+}
+
+.container
+{
+    width: 100vw;
+}
+
+.main-content
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.main-content a:link, .main-content a:visited
+{
+    color: #24483B;
+    text-decoration: none;
+}
+
+.main-monster
+{
+    width: 30%;
+    opacity: 0.6;
+    position: absolute;
+    bottom: -16px;
+}
+
+@media only screen and (max-width: 75em)
+{
+    .main-monster
+    {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 45em)
+{
+    .heading-1
+    {
+        font-size: 4rem;
+    }
+
+    .main-monster
+    {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 37.5em)
+{
+    .main-monster
+    {
+        width: 40%;
+    }
+}

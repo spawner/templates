@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>/answer</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+        <link href="https://fonts.googleapis.com/css?family=Quantico&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="main-overlay">
+                <img src="/static/images/Monster_03.gif" id="full-image" alt="Fullscreen Image"/>
+                <div class="full-close">x</div>
+            </div>
+            <nav>
+                <a href="/" class="default-link"><h1>/answer</h1></a>
+                <ul>
+                    <li><a href="/contact">Contact<div class="underline"></div></a></li>
+                </ul>
+            </nav>
+            <img src="static/images/Monster_02.gif" class="main-monster page-1"/>
+            <div class="main-content">
+                <h1 class="heading-1 page-1 mb-1">Test /answer endpoint</h1>
+                <h2 class="heading-2 text-light page-1 mb-4">A template for building the Spawner AI into your application.</h2>
+
+                <form action="/" method="POST" class="mb-4" id="main-form" autocomplete="off">
+                    <input type="text" name="test" class="form-input" id="main-input" placeholder="Enter your question about a stock, metric, or market."/>
+                    <button type="button" class="btn-create" id="search_button">Ask</button>
+                </form>
+            </div>
+            <div class="form-suggestions page-1">
+                <div class="suggestion-container">
+                    <h1>Try this: </h1>
+                    <div class="suggestion">
+                        <h1 class="text-light">pe ratio</h1>
+                        <span>&#10005;</span>
+                    </div>
+                    <div class="suggestion">
+                        <h1 class="text-light">eps</h1>
+                        <span>&#10005;</span>
+                    </div>
+                    <div class="suggestion">
+                        <h1 class="text-light">of</h1>
+                        <span>&#10005;</span>
+                    </div>
+                    <div class="suggestion">
+                        <h1 class="text-light">AAPL</h1>
+                        <span>&#10005;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="main-background"></div>
+        </div>
+        <div class="page-2">
+            <div class="result-content">
+                <div class="result mt-4">
+                    <p><iframe src="/static/response.txt" frameborder="0" height="400"
+                        width="100%"></iframe></p>
+                </div>
+            </div>
+            <div class="top-info">
+        
+            </div>
+        </div>
+        <script src="static/js/TweenMax.min.js"></script>
+        <script src="static/js/jquery-3.4.1.min.js"></script>
+        <script src="static/js/main.js"></script>
+        <script src="static/js/tags.js"></script>
+    </body>
+</html>
