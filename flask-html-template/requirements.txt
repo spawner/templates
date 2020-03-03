@@ -1,5 +1,5 @@
 Flask==1.1.1
 pandas==0.24.2
 numpy==1.16.1
-urllib3==1.24.1
+urllib3==1.24.2
 requests==2.22.0
