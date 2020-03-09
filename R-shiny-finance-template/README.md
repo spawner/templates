@@ -2,7 +2,7 @@
 
 R demo for getting started with the Spawner API. 
 
-![Current State](https://user-images.githubusercontent.com/33185528/74096257-7ed5a000-4aca-11ea-9d92-0369ba728b86.png)
+![Current State](https://user-images.githubusercontent.com/33185528/76226601-7620d880-61f4-11ea-94c3-c4b04c39a915.png)
 
 ## Getting Started
 
