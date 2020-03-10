@@ -51,7 +51,7 @@ server <- function(input, output) {
   
   dataInput <- reactive({
     
-    as.data.frame(fromJSON(paste("https://spawner.azurewebsites.net/answer", 
+    as.data.frame(fromJSON(paste("https://spawnerapi.com/answer", 
                                  str_replace_all(input$question, 
                                                  pattern=" ", 
                                                  replacement="%20"), 
