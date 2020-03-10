@@ -1,6 +1,6 @@
-# Streamlit Demo
+# Forecasting Demo
 
-Streamlit demo for using the Spawner.AI API for finance. You can use Streamlit to create interactive Data Science pages, deployable to the web through all major deployment surfaces. 
+Streamlit demo for using the Spawner.AI API for forecasting. 
 
 ![Current State](https://user-images.githubusercontent.com/33185528/74096257-7ed5a000-4aca-11ea-9d92-0369ba728b86.png)
 
@@ -17,7 +17,7 @@ Recommend using conda or virtualenv to sandbox your work
 ### Manual Install 
 If you go the manual route instead of requirements we recommend using [Anaconda](https://www.anaconda.com/distribution/). 
 ```
-pip install streamlit pandas numpy pillow urllib requests
+pip install streamlit pandas numpy urllib requests
 ```
 
 For additional information on Spawner: [Docs](https://spawner.gitbook.io/spawner-docs/)
@@ -27,7 +27,7 @@ For additional information on Streamlit: [Docs](https://streamlit.io/docs/)
 ### Running Streamlit App
 From command line navigate to your application's directory and use:
 ```
-streamlit run finance_streamlit.py
+streamlit run forecast.py
 ```
 
 
