@@ -2,7 +2,7 @@
 
 Streamlit demo for using the Spawner.AI API for forecasting. 
 
-![Current State](https://user-images.githubusercontent.com/33185528/74096257-7ed5a000-4aca-11ea-9d92-0369ba728b86.png)
+![Current State](https://user-images.githubusercontent.com/33185528/76388731-264f2800-6340-11ea-832d-f84cffcdf196.png)
 
 ## Getting Started
 
