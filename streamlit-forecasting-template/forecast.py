@@ -34,7 +34,7 @@ if forecast_submit_button:
     prior_sales = ','.join(str(x) for x in sales)
 
     st.success("Forecasting...")
-    response = requests.get("http://127.0.0.1:5000/forecast/" + prior_dates + "/" + prior_sales + "/" + periods + "/" + api_key)
+    response = requests.get("https://spawnerapi.com/forecast/" + prior_dates + "/" + prior_sales + "/" + periods + "/" + api_key)
     response_text = json.loads(response.text)
 
     date = []
