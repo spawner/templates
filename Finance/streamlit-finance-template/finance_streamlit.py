@@ -7,7 +7,7 @@ import requests
 
 #### Sidebar ####
 st.sidebar.header("Spawner Finance Demo")
-api_key = st.sidebar.text_input("Input API Key to get started.")
+token = st.sidebar.text_input("Input API Key to get started.")
 st.sidebar.info("Welcome to the Spawner finance demo. We built this demo for explaining some of our core financial endpoints.")
 st.sidebar.info("If you need an API key visit: https://spawner.ai")
 
@@ -21,8 +21,11 @@ submit_button = st.button("Ask")
 
 if submit_button:
     try: 
-        response = requests.get("https://spawnerapi.com/answer/" + financial_question + "/" + api_key)
-        st.write(response.json())
+        url = 'https://spawnerapi.com/answer/' + token
+        data = {'text': financial_question}
+        headers = {'Content-type': 'application/json'}
+        x = requests.post(url, data=json.dumps(data), headers=headers)
+        st.write(x.text)
     except: 
         st.write("bad query, try another question")
 
@@ -31,7 +34,7 @@ st.header("Portfolio optimizer - uses /portfolio endpoint")
 portfolio_tickers = st.text_input("Enter the name of a company, stock ticker, or multiple companies/tickers.")
 submit_button2 = st.button("Optimize")
 if submit_button2: 
-    response = requests.get("https://spawnerapi.com/portfolio/" + portfolio_tickers + "/" + api_key)
+    response = requests.get("https://spawnerapi.com/portfolio/" + portfolio_tickers + "/" + token)
     st.write(response.json())
 
 #### /backtest ####
@@ -54,7 +57,7 @@ st.write("run backtest for " + start  + " to " + end)
 submit_button2 = st.button("Backtest")
 if submit_button2: 
     try:
-        response = requests.get("https://spawnerapi.com/backtest/" + str(start) + "/" + str(end) + "/" + backtest_tickers + "/" + api_key)
+        response = requests.get("https://spawnerapi.com/backtest/" + str(start) + "/" + str(end) + "/" + backtest_tickers + "/" + token)
         st.write(response.json())
     except:
         st.write("bad date range or tickers")

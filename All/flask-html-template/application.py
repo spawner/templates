@@ -16,15 +16,16 @@ def contact():
 @app.route('/', methods = ['POST'])
 def search():
     question = request.form['test']
-    api_key = ''
-    url = "https://spawnerapi.com/answer/" + question + "/" + api_key
-    response = requests.get(url)
-    var = json.loads(response.text) 
+    # add your secret token here
+    token = ''
+    url = "https://spawnerapi.com/answer/" + token
+    data = {'text': question}
+    headers = {'Content-type': 'application/json'}
+    x = requests.post(url, data=json.dumps(data), headers=headers)
+    #print(x.text)
     file='static/response.txt' 
     with open(file, 'w') as filetowrite:
-        for i in var:
-            filetowrite.write(" ")
-            filetowrite.write(i['text'])
+        filetowrite.write(x.text)
     return 'finished dumping'
 
 if __name__ == '__main__':

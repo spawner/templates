@@ -34,8 +34,12 @@ if forecast_submit_button:
     prior_sales = ','.join(str(x) for x in sales)
 
     st.success("Forecasting...")
-    response = requests.get("https://spawnerapi.com/forecast/" + prior_dates + "/" + prior_sales + "/" + periods + "/" + api_key)
-    response_text = json.loads(response.text)
+    url = 'https://spawnerapi.com/forecast/' + token
+    data = {'dates': dates, 'values': values, 'periods': periods}
+    headers = {'Content-type': 'application/json'}
+
+    x = requests.post(url, data=json.dumps(data), headers=headers)
+    response_text = json.loads(x.text)
 
     date = []
     prediction = []
