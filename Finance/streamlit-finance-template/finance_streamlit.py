@@ -1,9 +1,12 @@
 import streamlit as st 
 import pandas as pd 
+import json 
 import numpy as np 
 import urllib.request
 from PIL import Image
 import requests 
+import plotly.graph_objects as go
+
 
 #### Sidebar ####
 st.sidebar.header("Spawner Finance Demo")
@@ -12,7 +15,7 @@ st.sidebar.info("Welcome to the Spawner finance demo. We built this demo for exp
 st.sidebar.info("If you need an API key visit: https://spawner.ai")
 
 #### Main Page ####
-st.title("Spawner + Streamlit = <3")
+st.title("Spawner.AI Trading Dashboard")
 
 #### /answer ####
 st.header("Financial Data Miner - uses /answer endpoint")
@@ -25,9 +28,26 @@ if submit_button:
         data = {'text': financial_question}
         headers = {'Content-type': 'application/json'}
         x = requests.post(url, data=json.dumps(data), headers=headers)
-        st.write(x.text)
+        result = json.loads(x.text)
+        for i in result:
+            st.write(i['text']) 
     except: 
         st.write("bad query, try another question")
+
+#### /fundamentals ####
+st.header("ML-driven trading signal - uses /fundamentals endpoint")
+fundamentals_submit_button = st.button("Get Ratings")
+
+if fundamentals_submit_button: 
+    try: 
+        url = "https://spawnerapi.com/fundamentals/" + token
+        response = requests.get(url)
+        result = response.json()
+        st.success("S&P 500 ratings sorted by ticker.")
+        st.write(result)
+    except: 
+        st.write("bad token or out of messages")
+
 
 #### /portfolio ####
 st.header("Portfolio optimizer - uses /portfolio endpoint")
@@ -39,7 +59,7 @@ if submit_button2:
 
 #### /backtest ####
 st.header("Stock Backtester - uses /backtest endpoint")
-backtest_tickers = st.text_input("Enter the ticker, company name, or multiple companies/tickers.")
+backtest_tickers = st.text_input("Enter the ticker, company name, or multiple companies/tickers. (Ex: ge, aapl)")
 
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 st.subheader("Start Date (Year-Month-Day)")
@@ -56,10 +76,10 @@ end = str(end_year) + "-" + str(end_month) + "-" + str(end_day)
 st.write("run backtest for " + start  + " to " + end)
 submit_button2 = st.button("Backtest")
 if submit_button2: 
-    try:
-        response = requests.get("https://spawnerapi.com/backtest/" + str(start) + "/" + str(end) + "/" + backtest_tickers + "/" + token)
-        st.write(response.json())
-    except:
-        st.write("bad date range or tickers")
+    #try:
+    response = requests.get("https://spawnerapi.com/backtest/" + str(start) + "/" + str(end) + "/" + backtest_tickers + "/" + token)
+    st.write(response.json())
+    #except:
+        #st.write("bad date range or tickers")
         
 
