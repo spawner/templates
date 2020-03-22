@@ -3,3 +3,4 @@ pandas==0.24.2
 numpy==1.16.1
 urllib3==1.24.2
 requests==2.22.0
+plotly==4.5.3
