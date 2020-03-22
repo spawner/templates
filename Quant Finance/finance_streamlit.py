@@ -12,7 +12,7 @@ st.sidebar.header("Spawner Finance Demo")
 token = st.sidebar.text_input("Input API Key to get started.")
 st.sidebar.info("If you need an API key visit: https://spawner.ai")
 st.sidebar.info("Welcome to the Spawner finance demo. We built this demo for explaining some of our core financial endpoints.")
-tools = ['Financial NLP', 'Financial ML', 'Portfolio Optimization', 'Backtesting']
+tools = ['Financial NLP', 'Financial ML', 'Metrics', 'Portfolio Optimization', 'Backtesting']
 tools_selectbox = st.sidebar.selectbox("Pick tool.", tools)
 
 
@@ -51,16 +51,63 @@ if tools_selectbox == 'Financial ML':
     st.title("Spawner.AI Financial ML")
     st.header("ML-driven trading signal - uses /fundamentals endpoint")
     fundamentals_submit_button = st.button("Get Ratings")
-
+    tickers = []
     if fundamentals_submit_button: 
         try: 
             url = "https://spawnerapi.com/fundamentals/" + token
             response = requests.get(url)
             result = response.json()
+            for i in result: 
+                tickers.append(i['Ticker'])
             st.success("S&P 500 ratings sorted by ticker.")
             st.write(result)
         except: 
             st.write("bad token or out of messages")
+
+if tools_selectbox == 'Metrics':
+    # retrieve S&P 500 tickers, can change to retrieve however you wish...
+    table = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
+    df = table[0]
+    sp500 = df["Symbol"]
+    tickers = list(sp500)
+    tickers.append('tsla')
+
+    st.title("Spawner.AI Equity Metrics")
+    st.header("Metrics - uses all metrics endpoints")
+    ticker = st.selectbox('Pick a ticker', tickers)
+    metrics_submit_button = st.button("Get Metrics")
+    if metrics_submit_button:
+        # Price
+        text = 'Price of ' + ticker
+        url = 'https://spawnerapi.com/answer/' + token
+        data = {'text': text}
+        headers = {'Content-type': 'application/json'}
+        x = requests.post(url, data=json.dumps(data), headers=headers)
+        result = json.loads(x.text)
+        date = []
+        data = []
+        # optimize...
+        for i in result:
+            iter_length = len(i['data'])
+            for j in range(0, iter_length):
+                data.append(i['data'][j]['close'])
+                date.append(i['data'][j]['date'])
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+                x=date,
+                y=data,
+                name=ticker,
+                line_color='dimgray'))
+        fig.update_layout(title_text=(ticker + ' 1M Daily Chart'))
+        st.plotly_chart(fig)
+        # Metrics
+        st.header("Metrics calculated on trailing 3 year period.")
+        endpoints = ['volatility', 'expected-return', 'max-drawdown', 'sharpe', 'calmar', 'sortino', 'value-at-risk', 'kelly-criterion']
+        for x in endpoints: 
+            url = "https://spawnerapi.com/" + x + '/' + ticker + '/' + token
+            response = requests.get(url)
+            result = response.text
+            st.write(x + ': ' + str(result))
 
 if tools_selectbox == 'Portfolio Optimization':
     #### /portfolio ####
